@@ -1,0 +1,104 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 26
+        buildToolsVersion "26.0.3"
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    flavorDimensions("default")
+    productFlavors {
+
+        production {
+            dimension "default"
+            applicationId "com.thirteendollars.singlerent"
+            resValue "string", "app_name", "Single Rent"
+            buildConfigField 'String', 'ENDPOINT', '"https://fathomless-mesa-93040.herokuapp.com"'
+        }
+
+        developmentGalla {
+            dimension "default"
+            applicationId "com.thirteendollars.singlerent.development"
+            resValue "string", "app_name", "Single Rent Test"
+            buildConfigField 'String', 'ENDPOINT', '"http://192.168.1.10:8000"'
+        }
+
+        developmentHome {
+            dimension "default"
+            applicationId "com.thirteendollars.singlerent.development"
+            resValue "string", "app_name", "Single Rent Test"
+            buildConfigField 'String', 'ENDPOINT', '"http://192.168.13.100:8000"'
+        }
+
+    }
+    buildToolsVersion '27.0.3'
+}
+
+dependencies {
+//    Retrofit2
+    implementation "com.squareup.retrofit2:retrofit:2.3.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.3.0"
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
+    implementation "com.github.filosganga:geogson-core:1.2.21"
+
+//    DI
+    ext.daggerVersion = '2.13'
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+
+//    UI
+    implementation 'com.github.StevenDXC:DxLoadingButton:2.0'
+
+
+//    Logging
+    implementation 'com.jakewharton.timber:timber:4.7.0'
+
+//    Support
+    ext.supportLibVersion = '26.1.0'
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+    implementation "com.android.support:design:$supportLibVersion"
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+    implementation "com.android.support:design:$supportLibVersion"
+
+//    Database
+    implementation 'com.scottyab:secure-preferences-lib:0.1.4'
+
+//    GooglePlayServices
+    implementation 'com.google.android.gms:play-services-maps:15.0.0'
+    implementation 'com.google.maps.android:android-maps-utils:0.5'
+
+
+//    Other
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}

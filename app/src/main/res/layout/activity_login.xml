@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.thirteendollars.singlerent.login.LoginViewModel"
+            />
+    </data>
+
+        <ScrollView
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <EditText
+                        android:id="@+id/login_email"
+                        android:text="@={viewModel.login}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/login_hint_email"
+                        android:inputType="textEmailAddress|textAutoComplete" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <EditText
+                        android:id="@+id/login_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/login_hint_password"
+                        android:text="@={viewModel.password}"
+                        android:inputType="textPassword" />
+                </android.support.design.widget.TextInputLayout>
+
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/login_remember_me_checkbox"
+                    android:checked="@={viewModel.rememberMe}"
+                    />
+
+                <com.dx.dxloadingbutton.lib.LoadingButton
+                    android:id="@+id/loginButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:lb_btnText="@string/login_login_button"
+                    app:lb_btnColor="@color/colorPrimary"
+                    app:lb_resetAfterFailed="true"
+                    android:onClick="@{(v) -> viewModel.onLoginButton()}"
+                    />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/login_no_account_text" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/login_register_button"
+                    android:textSize="30sp"
+                    android:onClick="@{() -> viewModel.onRegisterButton()}"
+                    />
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+</layout>

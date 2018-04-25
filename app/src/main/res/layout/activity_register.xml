@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.thirteendollars.singlerent.register.RegisterActivity">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="registerViewModel"
+            type="com.thirteendollars.singlerent.register.RegisterViewModel"
+            />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/register_container"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/layoutSurname"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <EditText
+                        android:nextFocusDown="@id/surname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_name"
+                        android:inputType="text"
+                        android:text="@={registerViewModel.name}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutSurname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/layoutName"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <EditText
+                        android:id="@+id/surname"
+                        android:nextFocusDown="@id/street"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_surname"
+                        android:inputType="text"
+                        android:text="@={registerViewModel.surname}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutStreet"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutName">
+
+                    <EditText
+                        android:id="@+id/street"
+                        android:nextFocusDown="@id/number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_street"
+                        android:inputType="text"
+                        android:text="@={registerViewModel.street}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/layoutStreet"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutName">
+
+                    <EditText
+                        android:id="@+id/number"
+                        android:nextFocusDown="@id/post_code"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_number"
+                        android:inputType="text"
+                        android:text="@={registerViewModel.number}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutPostCode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/layoutCity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutStreet">
+
+                    <EditText
+                        android:id="@+id/post_code"
+                        android:nextFocusDown="@id/city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_post_code"
+                        android:inputType="number"
+                        android:text="@={registerViewModel.postalCode}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutCity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutStreet">
+
+                    <EditText
+                        android:id="@+id/city"
+                        android:nextFocusDown="@id/pesel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_city"
+                        android:inputType="text"
+                        android:text="@={registerViewModel.city}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <View
+                    android:id="@+id/bar1"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPostCode" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutPesel"
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bar1">
+
+                    <EditText
+                        android:id="@+id/pesel"
+                        android:nextFocusDown="@id/id_card_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_pesel"
+                        android:inputType="number"
+                        android:text="@={registerViewModel.pesel}" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutIdCardNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPesel">
+
+                    <EditText
+                        android:id="@+id/id_card_number"
+                        android:nextFocusDown="@id/idExpiryDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_id_card_number"
+                        android:inputType="text"
+                        android:text="@={registerViewModel.idCardNumber}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutIdExpiryDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/layoutIdCardNumber"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPesel">
+
+                    <EditText
+                        android:id="@+id/idExpiryDate"
+                        android:nextFocusDown="@id/paymentCardNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_id_expiry_date"
+                        android:inputType="date"
+                        android:text="@={registerViewModel.idExpiryDate}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <View
+                    android:id="@+id/bar2"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutIdCardNumber" />
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutPaymentCardNumber"
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bar2">
+
+                    <EditText
+                        android:id="@+id/paymentCardNumber"
+                        android:nextFocusDown="@id/paymentCardExpiryDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/payment_card_number"
+                        android:inputType="number"
+                        android:text="@={registerViewModel.paymentCardNumber}" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutPaymentCardExpiryDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPaymentCardNumber">
+
+                    <EditText
+                        android:id="@+id/paymentCardExpiryDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_payment_card_expiry_date"
+                        android:inputType="date"
+                        android:nextFocusDown="@id/securityCode"
+                        android:text="@={registerViewModel.paymentCardExpiryDate}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutSecurityCode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/layoutPaymentCardExpiryDate"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPaymentCardNumber">
+
+                    <EditText
+                        android:id="@+id/securityCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_ccv"
+                        android:inputType="number"
+                        android:nextFocusDown="@id/email"
+                        android:text="@={registerViewModel.securityCode}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <View
+                    android:id="@+id/bar3"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutSecurityCode" />
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutEmail"
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bar3">
+
+                    <EditText
+                        android:id="@+id/email"
+                        android:nextFocusDown="@id/phone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_email"
+                        android:inputType="textEmailAddress"
+                        android:text="@={registerViewModel.email}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutPhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutEmail">
+
+                    <EditText
+                        android:id="@+id/phone_number"
+                        android:nextFocusDown="@id/password1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_phone_number"
+                        android:inputType="phone"
+                        android:text="@={registerViewModel.phoneNumber}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutPassword1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPhoneNumber">
+
+                    <EditText
+                        android:id="@+id/password1"
+                        android:nextFocusDown="@id/password2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_password"
+                        android:inputType="textPassword"
+                        android:text="@={registerViewModel.password1}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutPassword2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPassword1">
+
+                    <EditText
+                        android:id="@+id/password2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_repeat_password"
+                        android:inputType="textPassword"
+                        android:text="@={registerViewModel.password2}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <View
+                    android:id="@+id/bar4"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPassword2" />
+
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/registration_checkbox_terms"
+                    android:checked="@={registerViewModel.termsChecked}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bar4" />
+
+                <Button
+                    android:id="@+id/register_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:text="@string/registration_register_button"
+                    android:textColor="@android:color/white"
+                    android:onClick="@{ ()-> registerViewModel.onRegister()}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/loading_overlay"
+                android:visibility="@{registerViewModel.isLoading ? View.VISIBLE : View.GONE}"
+                style="@style/HeaderTextLargeLight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorLoadingFade"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/sending_request"
+                />
+
+        </FrameLayout>
+
+
+
+</ScrollView>
+</layout>
+
+

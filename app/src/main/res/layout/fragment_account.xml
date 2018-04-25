@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="accountViewModel"
+            type="com.thirteendollars.singlerent.main.account.AccountViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/account_header"
+            style="@style/HeaderText"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:text="@{String.format(`Logged as %s %s`,accountViewModel.name, accountViewModel.surname)}"
+            app:layout_constraintBottom_toBottomOf="@+id/account_logout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/account_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:onClick="@{() -> accountViewModel.onLogout()}"
+            android:src="@drawable/ic_logout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/bar1"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/account_header" />
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar1"
+            app:layout_constraintBottom_toTopOf="@id/account_save_button">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/register_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutStreet"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <EditText
+                        android:id="@+id/street"
+                        android:enabled="@{accountViewModel.isEditableMode()}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_street"
+                        android:inputType="text"
+                        android:nextFocusDown="@id/number"
+                        android:text="@={accountViewModel.street}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/layoutStreet"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <EditText
+                        android:id="@+id/number"
+                        android:enabled="@{accountViewModel.isEditableMode()}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_number"
+                        android:inputType="text"
+                        android:nextFocusDown="@id/post_code"
+                        android:text="@={accountViewModel.number}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutPostCode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/layoutCity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutStreet">
+
+                    <EditText
+                        android:id="@+id/post_code"
+                        android:enabled="@{accountViewModel.isEditableMode()}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_post_code"
+                        android:inputType="number"
+                        android:nextFocusDown="@id/city"
+                        android:text="@={accountViewModel.postalCode}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutCity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutStreet">
+
+                    <EditText
+                        android:id="@+id/city"
+                        android:enabled="@{accountViewModel.isEditableMode()}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_city"
+                        android:inputType="text"
+                        android:nextFocusDown="@id/pesel"
+                        android:text="@={accountViewModel.city}" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <View
+                    android:id="@+id/bar2"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPhoneNumber" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutPaymentCardNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bar2">
+
+                    <EditText
+                        android:id="@+id/paymentCardNumber"
+                        android:enabled="@{accountViewModel.isEditableMode()}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/payment_card_number"
+                        android:inputType="number"
+                        android:nextFocusDown="@id/paymentCardExpiryDate"
+                        android:text="@={accountViewModel.paymentCardNumber}" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutPaymentCardExpiryDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPaymentCardNumber">
+
+                    <EditText
+                        android:id="@+id/paymentCardExpiryDate"
+                        android:enabled="@{accountViewModel.isEditableMode()}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_payment_card_expiry_date"
+                        android:inputType="date"
+                        android:nextFocusDown="@id/securityCode"
+                        android:text="@={accountViewModel.paymentCardExpiryDate}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutSecurityCode"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/layoutPaymentCardExpiryDate"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPaymentCardNumber">
+
+                    <EditText
+                        android:id="@+id/securityCode"
+                        android:enabled="@{accountViewModel.isEditableMode()}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_ccv"
+                        android:inputType="number"
+                        android:nextFocusDown="@id/email"
+                        android:text="@={accountViewModel.securityCode}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <View
+                    android:id="@+id/bar3"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/colorPrimary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPaymentCardExpiryDate" />
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutPhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPostCode">
+
+                    <EditText
+                        android:id="@+id/phone_number"
+                        android:enabled="@{accountViewModel.isEditableMode()}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_phone_number"
+                        android:inputType="phone"
+                        android:nextFocusDown="@id/paymentCardNumber"
+                        android:text="@={accountViewModel.phoneNumber}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutPassword1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bar3">
+
+                    <EditText
+                        android:id="@+id/password1"
+                        android:enabled="@{accountViewModel.isEditableMode()}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_password"
+                        android:inputType="textPassword"
+                        android:nextFocusDown="@id/password2"
+                        android:text="@={accountViewModel.password1}" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layoutPassword2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPassword1">
+
+                    <EditText
+                        android:id="@+id/password2"
+                        android:enabled="@{accountViewModel.isEditableMode()}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/registration_repeat_password"
+                        android:inputType="textPassword"
+                        android:text="@={accountViewModel.password2}" />
+                </android.support.design.widget.TextInputLayout>
+
+            </android.support.constraint.ConstraintLayout>
+
+        </ScrollView>
+
+
+        <Button
+            android:id="@+id/account_save_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorPrimaryDark"
+            android:onClick="@{ ()-> accountViewModel.onButton()}"
+            android:text="@{ accountViewModel.isEditableMode() ?  @string/save_changes : @string/edit_data }"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>
