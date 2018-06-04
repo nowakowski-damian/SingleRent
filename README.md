@@ -5,12 +5,13 @@
 <img src="imgs/splash.png" width="45%" height="45%" hspace="10" vspace="10" />
 </div>
 
-SingleRent is sample Android application created for vehicle rental purposes. 
+SingleRent is an sample Android application created for vehicle rental purposes. 
 It helps to manage all the processes connected with automatic rental, such as:
 * finding available vehicle
 * making reservation
 * starting rental
 * finishing rental
+
 Application provides registration and login form as well.
 
 
